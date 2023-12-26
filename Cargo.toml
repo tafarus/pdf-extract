@@ -17,6 +17,7 @@ debug = true
 adobe-cmap-parser = "0.4.0"
 encoding = "0.2.33"
 euclid = "0.20.5"
+log = {  version = "0.4", optional = true }
 lopdf = {version = "0.30", default-features = false, features = ["nom_parser"]}
 postscript = "0.14"
 type1-encoding-parser = "0.1.0"
@@ -24,3 +25,6 @@ unicode-normalization = "0.1.19"
 
 [dev-dependencies]
 ureq = "2.6.2"
+
+[features]
+logging = ["dep:log"]
