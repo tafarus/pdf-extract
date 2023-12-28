@@ -20,6 +20,7 @@ use std::fs::File;
 use std::slice::Iter;
 use std::collections::HashMap;
 use std::collections::hash_map::Entry;
+use std::convert::TryInto;
 use std::rc::Rc;
 use std::marker::PhantomData;
 use std::result::Result;
@@ -467,7 +468,9 @@ impl<'a> PdfSimpleFont<'a> {
                                 }
                                 dlog!("{} = {} ({:?})", code, name, unicode);
                                 if let Some(ref mut unicode_map) = unicode_map {
-                                    dlog!("{} {}", code, unicode_map[&(code as u32)]);
+                                    let code_u32: u32 = code.try_into().unwrap();
+                                    unicode_map.get(&code_u32).map(|x| dlog!("{} {}", code, x));
+                                    //dlog!("{} {}", code, unicode_map[&(code as u32)]);
                                 }
                                 code += 1;
                             }
